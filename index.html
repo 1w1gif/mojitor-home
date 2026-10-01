@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mojitor · 我的地盘</title>
+<meta name="description" content="Mojitor 的个人主页:我做的所有项目都住在这里。">
+<style>
+  :root {
+    --bg: #FDF8F0;
+    --ink: #3B3226;
+    --accent: #FF8A3D;
+    --accent-deep: #B4691E;
+    --muted: rgba(59, 50, 38, 0.65);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    background-image:
+      radial-gradient(1000px 500px at 85% -10%, rgba(255, 138, 61, 0.08), transparent 60%),
+      radial-gradient(800px 400px at -10% 30%, rgba(255, 209, 220, 0.16), transparent 60%),
+      radial-gradient(900px 500px at 50% 110%, rgba(122, 199, 145, 0.10), transparent 60%);
+  }
+
+  .frame {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 22px 26px;
+  }
+
+  /* ---------- 顶栏 ---------- */
+  nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 2px;
+    font-size: 14px;
+  }
+  nav .logo { font-weight: 800; letter-spacing: 1px; }
+  nav .logo b { color: var(--accent); }
+  nav a { color: var(--muted); text-decoration: none; margin-left: 20px; transition: color .15s; }
+  nav a:hover { color: var(--accent-deep); }
+
+  /* ---------- Hero:头像+名字横排,紧凑 ---------- */
+  .hero {
+    display: flex; align-items: center; gap: 22px;
+    padding: 18px 2px 30px;
+  }
+  .avatar {
+    width: 84px; height: 84px; border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 10px 26px rgba(255, 160, 90, 0.28);
+    flex-shrink: 0;
+  }
+  .hello { font-size: 12px; letter-spacing: 4px; color: var(--muted); }
+  .name { font-size: 34px; font-weight: 800; margin: 4px 0 8px; line-height: 1.2; }
+  .chip {
+    display: inline-block; background: #FFE3C2; color: var(--accent-deep);
+    font-size: 12px; padding: 4px 12px; border-radius: 99px;
+    margin-left: 12px; vertical-align: middle; font-weight: 600;
+  }
+  .bio { font-size: 14px; color: var(--muted); line-height: 1.75; }
+  .bio b { color: var(--accent-deep); font-weight: 700; }
+
+  /* ---------- 项目卡片:占满宽度,吃掉剩余空间 ---------- */
+  .section-title {
+    font-size: 13px; font-weight: 800; letter-spacing: 3px;
+    color: var(--muted); margin-bottom: 14px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-title::after { content: ""; flex: 1; height: 1px; background: rgba(59,50,38,.12); }
+
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .card {
+    border-radius: 16px; padding: 18px;
+    position: relative; text-decoration: none; color: inherit;
+    display: block;
+    box-shadow: 0 6px 18px rgba(160, 130, 90, 0.12);
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(160, 130, 90, 0.22); }
+  .card:nth-child(1) { background: #FFF3E4; }
+  .card:nth-child(2) { background: #EAF7EC; }
+  .card:nth-child(3) { background: #F0EEFB; }
+  .card:nth-child(4) { background: #FDECEF; }
+  .card .ico { font-size: 26px; }
+  .card h3 { font-size: 16px; font-weight: 800; margin: 8px 0 5px; }
+  .card p { font-size: 12.5px; color: var(--muted); line-height: 1.6; }
+  .card .go {
+    position: absolute; right: 16px; top: 18px;
+    font-size: 12.5px; font-weight: 700; color: var(--accent-deep);
+    transition: transform .18s;
+  }
+  .card:hover .go { transform: translateX(4px); }
+  .card.soon { cursor: default; }
+  .card.soon .go { color: var(--muted); }
+
+  /* ---------- 底部 ---------- */
+  footer {
+    margin-top: 26px; padding-top: 16px;
+    border-top: 1px dashed rgba(59, 50, 38, 0.18);
+    display: flex; justify-content: space-between;
+    font-size: 12px; color: var(--muted);
+  }
+  footer a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(59,50,38,.25); }
+  footer a:hover { color: var(--accent-deep); border-color: var(--accent-deep); }
+
+  /* ---------- 移动端 ---------- */
+  @media (max-width: 640px) {
+    .hero { flex-direction: column; text-align: center; gap: 12px; padding: 10px 2px 24px; }
+    .name { font-size: 28px; }
+    .cards { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 6px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+<div class="frame">
+
+  <nav>
+    <div class="logo">Mojitor<b>.</b>xyz</div>
+    <div>
+      <a href="https://game.wangjiahaos.xyz">游戏</a>
+      <a href="https://wall.wangjiahaos.xyz">被窝</a>
+      <a href="https://github.com/1w1gif" target="_blank" rel="noreferrer">GitHub</a>
+    </div>
+  </nav>
+
+  <!-- Hero:头像与名字左右排,紧凑 -->
+  <header class="hero">
+    <img class="avatar" src="avatar.jpg" alt="Mojitor 的头像">
+    <div>
+      <div class="hello">HELLO, I AM</div>
+      <h1 class="name">Mojitor<span class="chip">温州大学</span></h1>
+      <p class="bio">爱写代码,也爱把想法做成<b>能点开的小东西</b>。这里是我的地盘,放着我做的所有项目,欢迎随便逛。</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="section-title">我的项目</div>
+    <div class="cards">
+      <a class="card" href="https://game.wangjiahaos.xyz">
+        <span class="go">做做中 →</span>
+        <div class="ico">🎮</div>
+        <h3>我的小游戏</h3>
+        <p>自己做的一个网页游戏,马上就好,敬请期待!</p>
+      </a>
+      <a class="card" href="https://wall.wangjiahaos.xyz">
+        <span class="go">进入 →</span>
+        <div class="ico">🧱</div>
+        <h3>被窝灵感墙</h3>
+        <p>和朋友共用的灵感便签墙,随想随贴。</p>
+      </a>
+      <div class="card soon">
+        <span class="go">-</span>
+        <div class="ico">✨</div>
+        <h3>敬请期待</h3>
+        <p>下一个项目在想策划中……</p>
+      </div>
+      <div class="card soon">
+        <span class="go">-</span>
+        <div class="ico">✨</div>
+        <h3>敬请期待</h3>
+        <p>学习笔记 / 小工具 / 还没想好</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <span>© 2026 Mojitor · wangjiahaos.xyz</span>
+    <a href="https://github.com/1w1gif" target="_blank" rel="noreferrer">github.com/1w1gif</a>
+  </footer>
+
+</div>
+</body>
+</html>
